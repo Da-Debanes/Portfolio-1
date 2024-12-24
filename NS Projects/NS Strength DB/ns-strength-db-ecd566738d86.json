@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "ns-strength-db",
+  "private_key_id": "ecd566738d86cf6f2be3ae26ca7675fab01db0c9",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDRPlR84TyB2kqD\ncQ1oz3IsrR7263300/Nb3a5Yixzl7UT6NesBZQ3Ew69h3xsDThfvOxPU4K3vQNKm\nHWMMBcfVUO/J229ISPCevh0E0iwGwyoyb4QG8BZCLqi3mIuA3MjT7L9uX+eZzFJy\nYPrVgrEzfejS/UYur0LsEcm+fcFIWnp0rSa0ebtEd7yRLQTAhkcCRZVl/XFkea9x\nCsxxCDiOk5Z/FmcDjg17fgfgirSoTdY3LkqJYu1ELUMSdUocHYT5mLUhE56wWc05\n+4duaSeRplekYS2F+9d64uIzXkVFUtXYJ9BbK6K1n5O+xytVWtNHKjcDIXsBST2k\n4eJhOn3dAgMBAAECggEAEq/rYb/H5Jz3PKfzF6I3QzAu7MR5Wk03lcPFl1jNOuem\n2mXIWDaLNUB4wFfplLD7yDzRd5idUBnM9lL3jpJRl4aD89YqKR2Ch9rYwp52miAB\n+8Ej3G7CviRmowb3pomRUgP50MS17XFnB5oLrNfgNYYQLg+6nd6/LlAkYWPfyDNL\nFBj0H1RIvrZLwdZ867AL3HY89PGKLsYJI3tzI1l/sqCDU9UolRpuuJjZZ+BTgvAA\nX7O1Qefku7FCvGQh3FRySzB0zpe4XkkYjCxtsMUjIbJ8EZmQ11bBzUgHDdhlyjwb\n6SG5JycixLYBf0fHgUV3Vvb/Vb8uc+sNAtcqv2uMTQKBgQDtN0Ip9axrJjcxMx1b\n22aflpjr2Q8KMwmUrO9mAtdpu11FoOFsaoRDVnkX+2nHBwaJ3LFJSw7VqcY+EjGK\nvob+pl09qHMnJFbMW6kxgD587GhBcTIl/kBw0ptGTbAv4M/ZQ+3KB9N7iJHjaNm1\noFZOtMwHLUg1GiktT9zMJAKc4wKBgQDh0Abywrh9hMXWjDG+DoBhBgW9IyaDhZSs\nb33T6oK6Qzd0f+LR/0wxJZtPIA5HXo4j/vv6kYMVNzRO4+JgCiprksBMx9BRfpBU\nOMX8TU4OHQ7ydktPC+IEBqFuw86NpSlF6uNd5Rx/W+gyLphEXj4Bxohsxh/FOHTU\n5YX1MOo2PwKBgQDS1h9nfeTeY1wAzaaVgx7mTwrh7M2SSiSE0WQCLhpZ7l8LSN+y\n5cViuFPuvdWZQSRNmiq0sxKfU0NQ3gjMgWUopqMO705SBtliz0FFLu/bRp+vMrXY\n0O9jl7zMsrYbB9yVBewueeA81vibwBBofvbXA5in9FZOZE8e5/GeO49a8wKBgChA\nTpzDPOOS4TkHMG6yYwvoaOl39IuJKiE6lnFJ4heVl7L6gNHx8gDotTB7hFAQeMHN\n19ioS3diqb5OPLHl3f3i4MhO7cE5ED0TCaeZmApH/7wUfgQPGDCjhe8alB0Hjb3a\nysCX8GZ7WX5oc9fr/J2QaA0Lm+op0BmK+D/mgjk9AoGAVp+UAdcMyqWPJ+Q963bS\nar9V4gJc8TyjmH/T3mMh9RbenJq4dgRbViBJ/DmarIrQrlcRcxIkJq+TafxZRVwX\nVfkqKRNT+UWFB1v5JT+OMBRvMECrQGJZzZCXOfkRhGmVJ5BVl3MIX19WBJYciIyf\ne5+jUBpJ/fSQf/b/iHr4iYQ=\n-----END PRIVATE KEY-----\n",
+  "client_email": "google-sheets-api-service-acco@ns-strength-db.iam.gserviceaccount.com",
+  "client_id": "105327908110863486209",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/google-sheets-api-service-acco%40ns-strength-db.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}
