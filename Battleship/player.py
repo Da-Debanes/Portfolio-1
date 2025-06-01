@@ -5,7 +5,6 @@ class Player:
     def __init__(self) -> None:
         self.name = input("What is your name: ")
         self.myboard = Board()
-        self.myboard.loadships()
         self.oppboard = None
         self.win = False
 
@@ -16,7 +15,7 @@ class Player:
         col, row = self.make_move(move)
         hit = self.oppboard.hit(col, row)
         self.oppboard.show()
-        self.win = len(self.oppboard.ships) == 0
+        self.win = len(self.oppboard.shipsquares) == 0
         if hit and not self.win:
             print("Hit! Go again.")
             self.turn()

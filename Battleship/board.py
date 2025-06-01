@@ -1,5 +1,3 @@
-from ship import Ship
-
 class Board:
     size = 0
 
@@ -14,14 +12,31 @@ class Board:
 
     def __init__(self) -> None:
         self.matrix = [[0 for _ in range(Board.size)] for _ in range(Board.size)]
-        self.ships = set()
+        self.shipsquares = set()
+        for _ in range(Board.size):  # Load 2 ships
+            self.loadships(2)
+            
 
-    def loadships(self) -> None:
-        for _ in range(2):  # You can change number of ships here
-            s = Ship(2, self)
-            for x, y in s.nothit:
-                self.matrix[y][x] = "S"
-            self.ships.add(s)
+    def loadships(self, size: int) -> None:
+        direction = self.get_dir()
+        topleft = self.get_topleft(direction)
+
+        new_squares = set()
+        for i in range(size):
+            if direction == "H":
+                new_squares.add((topleft[0] + i, topleft[1]))
+                self.matrix[topleft[1]][topleft[0]+i] = "S"
+            else:
+                new_squares.add((topleft[0], topleft[1] + i))
+                self.matrix[topleft[1] + i][topleft[0]] = "S"
+
+        if any(sqr in self.shipsquares for sqr in new_squares):
+            print("Overlap detected. Try placing again.")
+            return self.loadships(size)
+
+        self.shipsquares.update(new_squares)
+        self.loadshow()
+
 
     def show(self) -> None:
         header = "  " + " ".join([chr(i + 65) for i in range(Board.size)])
@@ -38,20 +53,64 @@ class Board:
                     row_str += "X "
             print(row_str)
 
+    def loadshow(self) -> None:
+        header = "  " + " ".join([chr(i + 65) for i in range(Board.size)])
+        print(header)
+        for i in range(Board.size):
+            row_str = str(i) + " "
+            for j in range(Board.size):
+                val = self.matrix[i][j]
+                if val == 0:
+                    row_str += "~ "
+                elif val == "S":
+                    row_str += "S "
+                elif val == 1:
+                    row_str += "o "
+                else:
+                    row_str += "X "
+            print(row_str)
+
     def hit(self, col: int, row: int) -> bool:
-        hit_something = False
-        for s in list(self.ships):  # use list to allow safe removal
-            if s.ishit((col, row)):
-                hit_something = True
-                if s.issunk():
-                    self.ships.remove(s)
-        self.matrix[row][col] = "X" if hit_something else 1
-        return hit_something
+        if self.matrix[row][col] == "S":
+            self.shipsquares.remove((col, row))
+            self.matrix[row][col] = "X"
+            return True
+        else:
+            self.matrix[row][col] = 1
+            return False
 
     def alrhit(self, coord: tuple[int, int]) -> bool:
         col, row = coord
         return self.matrix[row][col] in [1, "X"]
 
+    def get_dir(self) -> str:
+        direction = input("Ship direction [H for horizontal, V for vertical]: ").upper()
+        while direction not in ["H", "V"]:
+            print("Invalid direction.")
+            direction = input("Ship direction [H/V]: ").upper()
+        return direction
+
+    def get_topleft(self, direction: str) -> tuple[int, int]:
+        label = "top" if direction == "V" else "left"
+        pos = input(f"Position of {label}-most part of the ship (e.g., A0): ")
+        while True:
+            try:
+                col, row = ord(pos[0].upper()) - 65, int(pos[1])
+            except:
+                print("Invalid format.")
+                pos = input(f"Position of {label}-most part of the ship: ")
+                continue
+
+            if not Board.valid_topleft(pos, direction):
+                print("Out of bounds.")
+            elif (col, row) in self.shipsquares:
+                print("Position already taken.")
+            else:
+                break
+            pos = input(f"Position of {label}-most part of the ship: ")
+
+        return col, row
+    
     @classmethod
     def valid_topleft(cls, pos: str, direction: str) -> bool:
         try:
@@ -60,9 +119,9 @@ class Board:
             return False
         if not (0 <= col < cls.size and 0 <= row < cls.size):
             return False
-        if direction.upper() == "H" and col + 1 >= cls.size:
+        if direction == "H" and col + 1 >= cls.size:
             return False
-        if direction.upper() == "V" and row + 1 >= cls.size:
+        if direction == "V" and row + 1 >= cls.size:
             return False
         return True
 
