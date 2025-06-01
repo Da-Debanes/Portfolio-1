@@ -3,6 +3,7 @@ from board import Board
 
 class Player:
     def __init__(self) -> None:
+        #Class contains players name, their board with ships on it, their opponent's board and the status of whether they have won
         self.name = input("What is your name: ")
         self.myboard = Board()
         self.oppboard = None
@@ -10,17 +11,17 @@ class Player:
 
     def turn(self):
         move = input(f"{self.name}, enter your move (e.g., A0): ")
-        while not self.valid_move(move):
+        while not self.valid_move(move):                #Move validation
             move = input(f"{self.name}, try again: ")
         col, row = self.make_move(move)
         hit = self.oppboard.hit(col, row)
         self.oppboard.show()
-        self.win = len(self.oppboard.shipsquares) == 0
-        if hit and not self.win:
+        self.win = len(self.oppboard.shipsquares) == 0  #Check for win
+        if hit and not self.win:                        #Bonus Turn
             print("Hit! Go again.")
             self.turn()
 
-    def make_move(self, move: str) -> tuple[int, int]:
+    def make_move(self, move: str) -> tuple[int, int]: 
         return ord(move[0].upper()) - 65, int(move[1])
 
     def valid_move(self, move: str) -> bool:

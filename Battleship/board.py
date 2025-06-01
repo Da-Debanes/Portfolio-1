@@ -2,7 +2,7 @@ class Board:
     size = 0
 
     @classmethod
-    def sizing(cls) -> int:
+    def sizing(cls) -> int:                     #Initialise size of the board
         size = int(input("Game size (3–8): "))
         while size < 3 or size > 8:
             print("Inappropriate size. The game size should be between 3 and 8.")
@@ -10,23 +10,23 @@ class Board:
         cls.size = size
         return size
 
-    def __init__(self) -> None:
+    def __init__(self) -> None:                 #Class contains the board itself as well where the ships are
         self.matrix = [[0 for _ in range(Board.size)] for _ in range(Board.size)]
         self.shipsquares = set()
         for _ in range(Board.size):  # Load 2 ships
             self.loadships(2)
             
 
-    def loadships(self, size: int) -> None:
+    def loadships(self, size: int) -> None:     #Load the ships
         direction = self.get_dir()
         topleft = self.get_topleft(direction)
 
         new_squares = set()
         for i in range(size):
             if direction == "H":
-                new_squares.add((topleft[0] + i, topleft[1]))
-                self.matrix[topleft[1]][topleft[0]+i] = "S"
-            else:
+                new_squares.add((topleft[0] + i, topleft[1]))       #Put inside set for easy access
+                self.matrix[topleft[1]][topleft[0]+i] = "S"         #Show in Matrix
+            else:   
                 new_squares.add((topleft[0], topleft[1] + i))
                 self.matrix[topleft[1] + i][topleft[0]] = "S"
 
@@ -35,10 +35,10 @@ class Board:
             return self.loadships(size)
 
         self.shipsquares.update(new_squares)
-        self.loadshow()
+        self.loadshow()                         #Draw out the board to show where they put their ships
 
 
-    def show(self) -> None:
+    def show(self) -> None:                     #Show what the OPPONENT sees
         header = "  " + " ".join([chr(i + 65) for i in range(Board.size)])
         print(header)
         for i in range(Board.size):
@@ -53,7 +53,7 @@ class Board:
                     row_str += "X "
             print(row_str)
 
-    def loadshow(self) -> None:
+    def loadshow(self) -> None:                 #Show what the PLAYER sees
         header = "  " + " ".join([chr(i + 65) for i in range(Board.size)])
         print(header)
         for i in range(Board.size):
@@ -70,10 +70,10 @@ class Board:
                     row_str += "X "
             print(row_str)
 
-    def hit(self, col: int, row: int) -> bool:
+    def hit(self, col: int, row: int) -> bool:  #Check and update if player hits ship
         if self.matrix[row][col] == "S":
-            self.shipsquares.remove((col, row))
-            self.matrix[row][col] = "X"
+            self.shipsquares.remove((col, row)) #For set of ships
+            self.matrix[row][col] = "X"         #For matrix
             return True
         else:
             self.matrix[row][col] = 1
