@@ -5,3 +5,5 @@ Project 2: Choosing Restaurants
   Choosing restaurants in accordance to pricing demands, restaurants ratings and if we have visited them recently.
 Project 3: Game Board Optimisation
   Determining the size of a gameboard by seeing how many steps a winner needs to take to win in a given number of turns to customise game to a unique duration
+Project 4: Battleship
+  Creating a CLI based battleship game that uses OOP in Python
