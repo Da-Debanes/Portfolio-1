@@ -2,7 +2,7 @@ class Board:
     size = 0
 
     @classmethod
-    def sizing(cls) -> int:                     #Initialise size of the board
+    def sizing(cls) -> int:
         size = int(input("Game size (3–8): "))
         while size < 3 or size > 8:
             print("Inappropriate size. The game size should be between 3 and 8.")
@@ -10,23 +10,26 @@ class Board:
         cls.size = size
         return size
 
-    def __init__(self) -> None:                 #Class contains the board itself as well where the ships are
-        self.matrix = [[0 for _ in range(Board.size)] for _ in range(Board.size)]
-        self.shipsquares = set()
-        for _ in range(Board.size):  # Load 2 ships
-            self.loadships(2)
-            
+    def __init__(self, matrix=None, shipsquares=None) -> None:
+        if matrix is not None and shipsquares is not None:
+            self.matrix = matrix
+            self.shipsquares = shipsquares
+        else:
+            self.matrix = [[0 for _ in range(Board.size)] for _ in range(Board.size)]
+            self.shipsquares = set()
+            for _ in range(Board.size):
+                self.loadships(2)
 
-    def loadships(self, size: int) -> None:     #Load the ships
+    def loadships(self, size: int) -> None:
         direction = self.get_dir()
         topleft = self.get_topleft(direction)
 
         new_squares = set()
         for i in range(size):
             if direction == "H":
-                new_squares.add((topleft[0] + i, topleft[1]))       #Put inside set for easy access
-                self.matrix[topleft[1]][topleft[0]+i] = "S"         #Show in Matrix
-            else:   
+                new_squares.add((topleft[0] + i, topleft[1]))       #Put inside for easy access
+                self.matrix[topleft[1]][topleft[0] + i] = "S"       #Show in matrix
+            else:
                 new_squares.add((topleft[0], topleft[1] + i))
                 self.matrix[topleft[1] + i][topleft[0]] = "S"
 
@@ -110,7 +113,7 @@ class Board:
             pos = input(f"Position of {label}-most part of the ship: ")
 
         return col, row
-    
+
     @classmethod
     def valid_topleft(cls, pos: str, direction: str) -> bool:
         try:
@@ -124,79 +127,3 @@ class Board:
         if direction == "V" and row + 1 >= cls.size:
             return False
         return True
-
-
-'''
-class board:
-    size = 0
-
-    @classmethod
-    def sizing(cls) -> int:
-        size = int(input("Game size: "))
-        while size < 3 or size > 8 :
-            print("Inappropriate size. The game size should be between 3 and 8. Please try again")
-            size = int(input("Game size: "))
-        cls.size = size
-        return size
-    
-    def __init__(self) -> None:
-        self.matrix = [[0 for _ in range(board.size)] for _ in range(board.size)]
-        self.ships = set()
-    
-    def loadships(self) -> None:
-        for i in range(self.size):
-            a = ship.ship(2)
-            for p in a.nothit():
-                self.matrix[p[1]][p[0]] = "S"
-            self.ships.add(a)
-    
-    def show(self) -> None:
-        th = "  "
-        for i in range(self.size):
-            th += chr(i + 65) + " "
-        print(th)
-        for i in range(self.size):
-            st = str(i) + " "
-            for j in range(self.size):
-                if self.matrix[i][j] == 0 or self.matrix[i][j] == "S":
-                    st += "~"
-                elif self.matrix[i][j] == 1:
-                    st += "o"
-                else:
-                    st += "X"
-            print(st)
-
-    def hit(self, col: int, row: int) -> bool:
-        x = False
-        for ship in self.ships:
-            x = x or ship.ishit([col, row])
-            if ship.issunk():
-                self.ships.remove(ship)
-        if x:
-            self.matrix[row][col] = "X"
-        else:
-            self.matrix[row][col] = 1
-        return x
-
-    def alrhit(self, topleft) -> bool:
-        col, row = ord(topleft[0]) - 65, int(topleft[1])
-        return self.matrix[row][col] == 1 or self.matrix[row][col] == "X"
-
-    @classmethod
-    def valid_topleft(cls, topleft: str, dir: str):
-        try:
-            col, row = ord(topleft[0]) - 65, int(topleft[1])
-        except:
-            return False
-        if col >= board.size or row >= board.size or col < 0 or row < 0:
-            return False
-        else:
-            if dir == "H" and row >= board.size: 
-                return False
-            elif dir == "V" and col >= board.size:
-                return False
-        return True
-        
-'''
-
-        
