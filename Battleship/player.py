@@ -13,11 +13,11 @@ class Player:
         self.clear()
 
     @classmethod
-    def clear(self):    
+    def clear(self) -> None:    
         time.sleep(1)
         os.system("clear")
 
-    def turn(self):
+    def turn(self) -> None:
         move = input(f"{self.name}, enter your move (e.g., A0): ")
         while not self.valid_move(move):                #Move validation
             move = input(f"{self.name}, try again: ")

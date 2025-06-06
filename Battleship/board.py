@@ -13,7 +13,7 @@ class Board:
     def __init__(self, matrix=None, shipsquares=None) -> None:
         if matrix is not None and shipsquares is not None:
             self.matrix = matrix
-            self.shipsquares = shipsquares
+            self.shipsquares = shipsquares                          #Format: (row, col)
         else:
             self.matrix = [[0 for _ in range(Board.size)] for _ in range(Board.size)]
             self.shipsquares = set()
@@ -75,14 +75,14 @@ class Board:
 
     def hit(self, col: int, row: int) -> bool:  #Check and update if player hits ship
         if self.matrix[row][col] == "S":
-            self.shipsquares.remove((col, row)) #For set of ships
+            self.shipsquares.remove((row, col)) #For set of ships
             self.matrix[row][col] = "X"         #For matrix
             return True
         else:
             self.matrix[row][col] = 1
             return False
 
-    def alrhit(self, coord: tuple[int, int]) -> bool:
+    def alrhit(self, coord: tuple[int, int]) -> bool:       #Format: tuple(col, row)
         col, row = coord
         return self.matrix[row][col] in [1, "X"]
 
