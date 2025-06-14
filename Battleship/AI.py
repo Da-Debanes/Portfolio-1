@@ -72,7 +72,7 @@ class Ai:
             self.oppboard.show()
             self.turn()
         
-        
+    #AI Algorithm to be here.    
     def addq(self, row: int, col: int) -> None:
         dir = [(-1, 0), (1, 0), (0, -1), (0, 1)]
         adjacent = []
@@ -84,3 +84,4 @@ class Ai:
         random.shuffle(adjacent)
         for move in adjacent:
             self.q.put(move)
+
