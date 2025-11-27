@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <select id="nameSelect"></select>
+  <input type="text" id="reason" placeholder="Reason">
+  <button onclick="deleteOff()">🗑 Delete Earliest</button>
+
+  <script>
+    function refreshNames() {
+      google.script.run.withSuccessHandler(renderNames).getEligibleNames();
+    }
+
+    function renderNames(data) {
+      const options = data.map(r => `<option value="${r.name}">${r.name} (${r.offs} offs)</option>`).join('');
+      $('#nameSelect').html(options);
+    }
+
+    function deleteOff() {
+      const name = $('#nameSelect').val();
+      const reason = document.getElementById('reason').value.trim();
+      if (!name) return;
+      if (!confirm(`Delete earliest off for ${name} for ${reason}?`)) return;
+      google.script.run
+      .withSuccessHandler(() => {
+        alert("Off deleted successfully!");
+        refreshNames();
+      })
+      .withFailureHandler(err => {
+        alert("Error: " + err.message);
+        console.error(err);
+      })
+      .deleteOff(name, reason);
+    }
+
+    $(refreshNames); // populate on open
+  </script>
+</body>
+</html>

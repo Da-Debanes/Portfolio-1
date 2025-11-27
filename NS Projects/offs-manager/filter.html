@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+  <h3>Offs Filter</h3>
+  <input type="text" id="searchName" placeholder="Search name...">
+  <select id="statusFilter">
+    <option value="">All Statuses</option>
+    <option value="active">Active</option>
+    <option value="used">Used</option>
+    <option value="expired">Expired</option>
+    <option value="deleted">Deleted</option>
+  </select>
+  <button onclick="refresh()">🔍 Filter</button>
+  
+  <table id="offsTable">
+    <thead>
+      <tr><th>Name</th><th>Status</th><th>Expiry</th></tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <script>
+    function refresh() {
+      const filter = {
+        name: $('#searchName').val(),
+        status: $('#statusFilter').val()
+      };
+      google.script.run.withSuccessHandler(renderTable).getOffs(filter);
+    }
+
+    function renderTable(data) {
+      const rows = data.map(r => `<tr>
+        <td>${r.name}</td>
+        <td>${r.status}</td>
+        <td>${r.expiry || ''}</td>
+      </tr>`).join('');
+      $('#offsTable tbody').html(rows);
+    }
+
+    $(refresh); // load on open
+  </script>
+</body>
+</html>
+

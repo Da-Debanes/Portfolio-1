@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+  <input type="text" id="owner" placeholder="Recipient Name">
+  <input type="text" id="purpose" placeholder="Purpose">
+  
+  <p>Creator: <span id="creatorEmail"><?= creatorEmail ?></span></p>
+  
+  <button onclick="createOffFromSidebar()">➕ Create Off</button>
+
+  <script>
+    function createOffFromSidebar() {
+      const owner = document.getElementById('owner').value.trim();
+      const purpose = document.getElementById('purpose').value.trim();
+      const creator = document.getElementById('creatorEmail').textContent.trim();
+      const createdAt = new Date().toISOString(); // send as ISO string, not Date
+
+      if (!owner || !purpose) {
+        alert("Enter owner and purpose");
+        return;
+      }
+
+      google.script.run
+        .withSuccessHandler(msg => {
+          $('#owner').val('');
+          $('#purpose').val('');
+        })
+        .withFailureHandler(err => alert("Error: " + err.message))
+        .createOff(createdAt, owner, purpose, creator); 
+    }
+  </script>
+</body>
+</html>
